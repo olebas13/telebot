@@ -1,4 +1,4 @@
-package com.olebas.telebot.config;
+package com.olebas.telebot.helper;
 
 import java.io.File;
 import java.io.FileInputStream;

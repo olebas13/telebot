@@ -1,7 +1,8 @@
 package com.olebas.telebot.Bot;
 
+import com.olebas.telebot.SB.Author;
 import com.olebas.telebot.SB.Book;
-import com.olebas.telebot.config.ReadFileData;
+import com.olebas.telebot.helper.ReadFileData;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -14,10 +15,7 @@ import java.net.URL;
 
 public class Bot extends TelegramLongPollingBot {
 
-
-    Book book = new Book();
     private long chat_id;
-
     private static ReadFileData data = new ReadFileData();
 
     public void onUpdateReceived(Update update) {
@@ -40,10 +38,15 @@ public class Bot extends TelegramLongPollingBot {
         if (msg.contains("Информация о книге")) {
             return getInfoBook();
         }
-        return msg;
+        if (msg.contains("/person")) {
+            msg = msg.replace("/person ", "");
+            return getInfoPerson(msg);
+        }
+        return "He понял!";
     }
 
     public String getInfoBook(){
+        Book book = new Book();
         SendPhoto sendPhotoRequest = new SendPhoto();
 
         try(InputStream in = new URL(book.getImg()).openStream()){
@@ -63,6 +66,24 @@ public class Bot extends TelegramLongPollingBot {
                 + "\n\nКоличество лайков: " + book.getLikes()
                 + "\n\nПоследние коментарии:\n" + book.getCommentList();
         return info;
+    }
+
+    public String getInfoPerson(String msg) {
+        Author author = new Author(msg);
+
+        SendPhoto sendPhotoRequest = new SendPhoto();
+
+        try(InputStream in = new URL(author.getAvatar()).openStream()){
+            sendPhotoRequest.setChatId(chat_id);
+            sendPhotoRequest.setPhoto("Photo", in);
+            execute(sendPhotoRequest);
+        } catch (IOException ex){
+            System.out.println("File not found");
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+
+        return author.getInfoPerson();
     }
 
     @Override
