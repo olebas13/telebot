@@ -20,3 +20,4 @@ target/maven-archiver/
 target/maven-status/
 target/telebot-1.0-SNAPSHOT.jar
 /src/main/resources/app.properties
+/.idea/
