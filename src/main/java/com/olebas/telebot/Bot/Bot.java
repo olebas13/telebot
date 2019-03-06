@@ -1,6 +1,7 @@
 package com.olebas.telebot.Bot;
 
 import com.olebas.telebot.SB.Book;
+import com.olebas.telebot.config.ReadFileData;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -13,8 +14,11 @@ import java.net.URL;
 
 public class Bot extends TelegramLongPollingBot {
 
+
     Book book = new Book();
     private long chat_id;
+
+    private static ReadFileData data = new ReadFileData();
 
     public void onUpdateReceived(Update update) {
         update.getUpdateId();
@@ -63,10 +67,12 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public String getBotToken() {
-        return "766056739:AAG8dwPUNVNeb9vt7QyG3yWKxzYRjSJr8PI";
+        String token = data.getBotToken();
+        return token;
     }
 
     public String getBotUsername() {
-        return "@olebas_bot";
+        String username = data.getBotUsername();
+        return username;
     }
 }
