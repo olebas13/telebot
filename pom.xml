@@ -50,7 +50,7 @@
                     <assembleDirectory>target</assembleDirectory>
                     <programs>
                         <program>
-                            <mainClass>com.home.server.Main</mainClass>
+                            <mainClass>Main</mainClass>
                             <name>olebas-bot</name>
                         </program>
                     </programs>
