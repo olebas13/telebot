@@ -119,10 +119,10 @@ fi
 
 exec "$JAVACMD" $JAVA_OPTS  \
   -classpath "$CLASSPATH" \
-  -Dapp.name="workerBot" \
+  -Dapp.name="olebas-bot" \
   -Dapp.pid="$$" \
   -Dapp.repo="$REPO" \
   -Dapp.home="$BASEDIR" \
   -Dbasedir="$BASEDIR" \
-  com.home.server.TelegramBot \
+  com.olebas.telebot.Main \
   "$@"
