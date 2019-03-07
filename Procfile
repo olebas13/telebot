@@ -1,1 +1,1 @@
-worker: java -cp target/classes/:target/dependency/* com.olebas.telebot.Main
+worker: sh target/bin/olebas-bot
