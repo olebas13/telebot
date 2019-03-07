@@ -1,1 +1,1 @@
-worker: sh target/bin/olebas-bot
+worker: sh target/bin/workerBot
